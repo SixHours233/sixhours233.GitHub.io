@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Proxy Launcher</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>🌐 Welcome to My Proxy</h1>
+    <form id="proxyForm">
+      <input type="text" id="targetUrl" placeholder="Enter a website URL" required>
+      <button type="submit">Go</button>
+    </form>
+
+    <div class="links">
+      <a href="account.html">Account Home</a>
+    </div>
+  </div>
+
+  <script>
+    const proxyUrl = "https://your-subdomain.workers.dev"; // 替换成你的 Cloudflare Worker 地址
+
+    document.getElementById("proxyForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const target = document.getElementById("targetUrl").value;
+      if (!target.startsWith("http")) {
+        alert("Please enter a valid URL with http or https");
+        return;
+      }
+      const proxied = `${proxyUrl}?url=${encodeURIComponent(target)}`;
+      window.open(proxied, "_blank");
+    });
+  </script>
+</body>
+</html>
